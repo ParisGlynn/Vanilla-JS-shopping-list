@@ -2,10 +2,12 @@ const itemForm = document.querySelector('.itemForm');
 const submitBtn = document.querySelector('.submitBtn');
 const itemInput = document.querySelector('.itemInput');
 const itemList = document.querySelector('.itemList');
+const clearBtn = document.querySelector('.clear');
 
 // Event Listeners
 itemForm.addEventListener('submit', submitForm);
 itemList.addEventListener('click', removeAnItem);
+clearBtn.addEventListener('click', clearList);
 
 function submitForm(e) {
   e.preventDefault();
@@ -25,5 +27,11 @@ function submitForm(e) {
 function removeAnItem(e) {
   if(e.target.classList.contains('removeItem')) {
     e.target.parentElement.parentElement.remove();
+  }
+}
+
+function clearList(e) {
+  while(itemList.firstChild) {
+    itemList.removeChild(itemList.firstChild);
   }
 }

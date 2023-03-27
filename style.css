@@ -1,3 +1,7 @@
+:root {
+  --buttonColor: #b3cb19;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -25,7 +29,6 @@ header {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 10px;
 }
 
 .itemInput {
@@ -37,7 +40,7 @@ header {
 
 .submitBtn, .clear {
   padding: 10px;
-  background-color: #637604;
+  background-color: var(--buttonColor);
   color: #fff;
   border: none;
   outline: none;
@@ -58,7 +61,7 @@ header {
   border: none;
   border-bottom: 1px solid #bbb;
   font-size: 1.2rem;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .itemList {
