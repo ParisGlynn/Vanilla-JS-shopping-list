@@ -3,13 +3,20 @@ const submitBtn = document.querySelector('.submitBtn');
 const itemInput = document.querySelector('.itemInput');
 const itemList = document.querySelector('.itemList');
 const clearBtn = document.querySelector('.clear');
+const filter = document.querySelector('#filterText');
 
 // Event Listeners
 itemForm.addEventListener('submit', submitForm);
 itemList.addEventListener('click', removeAnItem);
 clearBtn.addEventListener('click', clearList);
+filter.addEventListener('input', filterList);
+
+noItems();
 
 function submitForm(e) {
+  if(e.target.value === '') {
+    return;
+  }
   e.preventDefault();
   const li = document.createElement('li');
   const button = document.createElement('button');
@@ -22,16 +29,48 @@ function submitForm(e) {
   button.appendChild(icon);
   li.appendChild(button);
   itemList.appendChild(li);
+
+  noItems();
 }
 
 function removeAnItem(e) {
   if(e.target.classList.contains('removeItem')) {
-    e.target.parentElement.parentElement.remove();
+    if(confirm('Are You Sure?')) {
+      e.target.parentElement.parentElement.remove();
+    }
   }
+  noItems();
 }
 
 function clearList(e) {
   while(itemList.firstChild) {
     itemList.removeChild(itemList.firstChild);
   }
+  noItems();
+}
+
+// Check if no items in shopping list
+function noItems() {
+  const items = itemList.querySelectorAll('li');
+  if(items.length === 0) {
+    filter.style.display = 'none';
+    clearBtn.style.display = 'none';
+  } else {
+    filter.style.display = 'block';
+    clearBtn.style.display = 'block';
+  }
+}
+
+function filterList(e) {
+  const text = e.target.value.toLowerCase();
+  const items = itemList.querySelectorAll('li');
+  items.forEach(item => {
+    const itemName = item.firstChild.textContent.toLowerCase();
+    
+    if(itemName.indexOf(text) != -1) {
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+    }
+  });
 }

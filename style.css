@@ -75,7 +75,9 @@ header {
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 10px;
-  
+  border: 1px solid #bbb;
+  padding: 5px 10px;
+  border-radius: 3px;
 }
 
 .itemList li button {
