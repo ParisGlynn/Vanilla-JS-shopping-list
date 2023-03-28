@@ -14,9 +14,13 @@ filter.addEventListener('input', filterList);
 noItems();
 
 function submitForm(e) {
-  if(e.target.value === '') {
+  const newItem = itemInput.value;
+  if(newItem === '') {
     return;
   }
+
+  
+
   e.preventDefault();
   const li = document.createElement('li');
   const button = document.createElement('button');
@@ -31,6 +35,8 @@ function submitForm(e) {
   itemList.appendChild(li);
 
   noItems();
+
+  addItemToStorage(newItem);
 }
 
 function removeAnItem(e) {
@@ -73,4 +79,16 @@ function filterList(e) {
       item.style.display = 'none';
     }
   });
+}
+
+function addItemToStorage(item) {
+  let itemsFromStorage;
+  if(localStorage.getItem('items') === null) {
+    itemsFromStorage = [];
+  } else {
+    itemsFromStorage = JSON.parse(localStorage.getItem('items'));
+  } 
+
+  itemsFromStorage.push(item);
+  localStorage.setItem('items', JSON.stringify(itemsFromStorage));
 }
